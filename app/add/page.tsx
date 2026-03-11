@@ -2,14 +2,20 @@
 import React, { useState } from 'react'
 import "@/app/globals.css"
 import Navbar from '../components/Navbar'
-import { useDispatch } from 'react-redux'
+import { useAppDispatch } from '../hooks'
 import { addTodoAsync } from '../../features/counter/counterSlice'
 import { MdOutlineAddCircle } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
 
+export interface Todo {
+  id: string;
+  text: string;
+  isCompleted: boolean;
+}
+
 const Add = () => {
 
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     const [onetodo, setOnetodo] = useState("")
     const [showMessage, setShowMessage] = useState(false)
     const handleAdd = () => {
