@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.bg-normal {
+    background-color: #eb6a6a;
+}
