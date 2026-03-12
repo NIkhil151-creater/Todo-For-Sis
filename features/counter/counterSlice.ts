@@ -31,10 +31,9 @@ export const fetchTodos = createAsyncThunk('counter/fetchTodos', async () => {
 });
 
 export const addTodoAsync = createAsyncThunk('counter/addTodo', async (text: string) => {
-  const response = await fetch('/api/todos', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ text })
+  // Send as URL parameter to avoid JSON parsing issues
+  const response = await fetch(`/api/todos?text=${encodeURIComponent(text)}`, {
+    method: 'POST'
   });
   if (!response.ok) {
     throw new Error('Failed to add todo');
@@ -115,6 +114,10 @@ export const counterSlice = createSlice({
       // Add todo
       .addCase(addTodoAsync.fulfilled, (state, action) => {
         state.todos.push(action.payload);
+      })
+      .addCase(addTodoAsync.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || 'Failed to add todo';
       })
       // Toggle todo
       .addCase(toggleTodoAsync.fulfilled, (state, action) => {
