@@ -4,6 +4,7 @@ import Navbar from '../components/Navbar'
 import { useAppDispatch } from '../hooks'
 import { addTodoAsync } from '../../features/counter/counterSlice'
 import { BiMessageAltAdd } from "react-icons/bi";
+import "@/app/globals.css"
 
 export default function AddPage() {
     const dispatch = useAppDispatch()
@@ -57,4 +58,5 @@ export default function AddPage() {
         </div>
     )
 }
+
 
